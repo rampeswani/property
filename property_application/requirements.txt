@@ -1,5 +1,11 @@
-asgiref==3.8.1
-Django==5.1.5
-psycopg2==2.9.10
-sqlparse==0.5.3
-tzdata==2025.1
+# Django framework
+Django>=5.1.4
+
+# PostgreSQL adapter (use binary version for precompiled libraries)
+psycopg2-binary>=2.9.8
+
+# Other common libraries (add as needed)
+gunicorn>=20.1.0  # For running the WSGI application
+whitenoise>=6.5.0  # For serving static files
+dj-database-url>=0.5.0  # For easier database URL parsing
+python-decouple>=3.8  # For managing environment variables
