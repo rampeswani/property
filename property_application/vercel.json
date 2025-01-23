@@ -15,5 +15,6 @@
             "src": "/(.*)",
             "dest": "/property_application/wsgi.py"
         }
-    ]
+    ],
+    "postinstall": "python3.9 manage.py collectstatic --noinput"
 }
