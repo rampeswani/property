@@ -32,7 +32,7 @@ def Home(request):
         
 
         
-    return render(request,'D://Property_web//property_application//templates//real_estate//index.html')
+    return render(request,'real_estate/index.html')
 
 def New(request):
     return render(request,'D://Property_web//property_application//templates//real_estate//new.html')
