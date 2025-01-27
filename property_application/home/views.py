@@ -35,18 +35,18 @@ def Home(request):
     return render(request,'real_estate/index.html')
 
 def New(request):
-    return render(request,'D://Property_web//property_application//templates//real_estate//new.html')
+    return render(request,'real_estate//new.html')
 
 
 def Property_List(request):
-    return render(request,'D://Property_web//property_application//templates//real_estate//product_list.html')
+    return render(request,'real_estate//product_list.html')
 
 
 def ContactPage(request):
-    return render(request,'D://Property_web//property_application//templates//real_estate//contact_new.html')
+    return render(request,'real_estate//contact_new.html')
 
 def Contact(request):
-    return render(request,'D://Property_web//property_application//templates//real_estate//contact.html')
+    return render(request,'real_estate//contact.html')
 
 def DetailForm(request):
 
