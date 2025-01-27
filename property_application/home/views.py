@@ -67,7 +67,7 @@ def DetailForm(request):
         'ref_list' : ref_list
     }
 
-    return render(request,'real_estate/index.htmldetail_form.html',context)
+    return render(request,'real_estate/detail_form.html',context)
 
 
 
