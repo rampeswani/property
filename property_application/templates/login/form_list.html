@@ -1,0 +1,65 @@
+{% extends 'login/admin_index.html' %}
+
+{% block content %}
+<div class="content">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="mb-0">{{request.breadcrumb}}</h5>
+        </div>
+        <div class="card-body">
+            <div class="mb-4">
+                <table   class="table datatable-button-html5-columns">
+                    <thead>
+                        <tr>
+                            <th> Sr No </th>
+                            <th> Name</th>
+                            
+                            <th> Mobile </th>
+                            <th > Customer Remark</th>
+                            <th> Customer selected City</th>
+                            <th> Custome Prefered Location</th>
+                            <th> Customer Type </th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for record in data %}
+                            <tr>
+                                <td>
+                                    {{forloop.counter}}
+                                </td>
+                                
+                                <td>
+                                    <a href="">{{record.name}} </a>
+                                </td>
+
+                                
+
+                                <td>
+                                    {{record.number}}
+                                </td>
+
+                                <td>
+                                    {{record.remark}}
+                                </td>
+                                <td>
+                                    {{record.city}}
+                                </td>
+                                <td>
+                                    {{record.location}}
+                                </td>
+                                <td>
+                                    {{record.customerType}}
+                                </td>
+                               
+                                
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
