@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from .models import Details
-
+from django.contrib.auth import logout
+from django.shortcuts import redirect
 from .models import MasterState , PropertyType, CityMaster , Location, ReferenceMaster ,Details
-
+from django.contrib.auth.decorators import login_required
 
 def Home(request):
     if(request.method == 'POST'):
@@ -112,12 +113,19 @@ def Login(request):
             messages.error(request, "Invalid username or password")
     
     return render(request, "login/login.html")
-    
 
+
+
+def Logout(request):
+    logout(request)  # Logs out the user
+    request.session.flush()  # Clears all session data
+    return redirect("login")  # Redirect to the login page
+    
+@login_required
 def admin(request):
     return render(request,'login/admin_index.html')
 
-from django.contrib.auth.decorators import login_required
+
 
 @login_required
 def ListFormData(request):
