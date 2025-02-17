@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'home'
+    'home',
+    'masters'
 ]
 
 MIDDLEWARE = [
@@ -108,6 +109,7 @@ DATABASES = {
         'PASSWORD': 'FPnpxkBajVZKxUEqEJpBieiiXxZhyScM',
         'HOST': 'autorack.proxy.rlwy.net',
         'PORT' : '56578',
+        
     }
 }
 
