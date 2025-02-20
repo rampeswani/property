@@ -59,7 +59,7 @@ def PropertyAdd(request):
         if photo:  # Ensure files were uploaded
             for file in photo:  # Iterate over each uploaded file
                 # Define folder path using property ID
-                property_folder = os.path.join(settings.STATICFILES_DIRS[0], 'uploads', f'property_{property_create.property_list_id}')
+                property_folder = os.path.join(settings.MEDIA_ROOT, 'uploads', f'property_{property_create.property_list_id}')
                 os.makedirs(property_folder, exist_ok=True)  # Create the folder if it doesn't exist
 
                 # Generate a unique filename
