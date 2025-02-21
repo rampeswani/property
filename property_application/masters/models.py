@@ -11,7 +11,7 @@ class BHK(models.Model):
     
 
     def __str__(self):
-        return self.bhk_name 
+        return str(self.bhk_name )
 
     class Meta :
         ordering = ['bhk_id']

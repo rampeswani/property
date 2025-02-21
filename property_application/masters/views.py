@@ -7,8 +7,12 @@ from django.shortcuts import redirect
 # from .models import MasterState , PropertyType, CityMaster , Location, ReferenceMaster ,Details
 from django.contrib.auth.decorators import login_required
 from .models import BHK
-# Create your views here.
+from django.contrib.auth.decorators import login_required
+# Create your views here
 
+
+
+@login_required
 def BHKCreate(request):
     if request.method == "POST":
         print("inside master form")
@@ -24,6 +28,7 @@ def BHKCreate(request):
 
     return render(request,'masters/bhk_create_form.html')
 
+@login_required
 def BHKList(request):
     data = BHK.objects.filter(is_active= True)
     context = {
@@ -31,6 +36,6 @@ def BHKList(request):
     }
     return render(request,'masters/bhk_list.html',context)
 
-
+@login_required
 def MasterData(request):
     return render(request,'masters/master_data.html')

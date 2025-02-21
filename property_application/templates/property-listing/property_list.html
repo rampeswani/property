@@ -1,69 +1,144 @@
 {% extends 'login/admin_index.html' %}
 {% load static %}
+
 {% block content %}
 <div class="content">
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
-            <h5 class="mb-0">Property  List </h5>
-
-
+            <h5 class="mb-0">Property List</h5>
             <a href="{% url 'property-add' %}" class="btn btn-primary"><i class="ph-plus me-2"></i> Add</a>
-            
         </div>
         <div class="card-body">
             <div class="mb-4">
-                <table   class="table datatable-button-html5-columns">
+                <table class="table datatable-button-html5-columns">
                     <thead>
                         <tr>
                             <th> Sr No </th>
-                            <th> Name</th>
-                            
-                            <th> Mobile </th>
-                            <th > Customer Remark</th>
-                            <th> Customer selected City</th>
-                            <th> Custome Prefered Location</th>
-                            <th> Customer Type </th>
-                            
+                            <th> ID</th>
+                            <th> Title</th>
+                            <th> BHK</th>
+                            <th> bathroom</th>
+                            <th>balcony</th>
+                            <th> parking</th>
+                            <th> Price Range</th>
+                            <th> SQRT Details </th>
+                            <th>City</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        {% for record in data %}
-                            <tr>
-                                <td>
-                                    {{forloop.counter}}
-                                </td>
-                                
-                                <td>
-                                    <a href="">{{record.name}} </a>
-                                </td>
+                    <tbody id="property-list">
+                        {% for record in page_obj %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td> {{record.property_list_id}}</td>
+                            <td>{{ record.property_list_title }}</td>
+                            <td>{{ record.bhk }}</td>
+                            <td>
+                                    {{record.property_bathroom}}
+                            </td>
+                            <td>
+                                {{record.property_kitchne}}
 
-                                
-
-                                <td>
-                                    {{record.number}}
-                                </td>
-
-                                <td>
-                                    {{record.remark}}
-                                </td>
-                                <td>
-                                    {{record.city}}
-                                </td>
-                                <td>
-                                    {{record.location}}
-                                </td>
-                                <td>
-                                    {{record.customerType}}
-                                </td>
-                               
-                                
-                            </tr>
+                            </td>
+                            <td>
+                                {{record.property_parking}}
+                            </td>
+                            <td>
+                                {{record.property_price_start_range}} - {{record.property_price_end_range}}
+                            </td>
+                            <td>
+                                {{record.property_sqrt_start_range}} - {{record.property_sqrt_end_range}}
+                            </td>
+                            <td>
+                                {{record.state}} - {{record.city}}
+                            </td>
+                        </tr>
                         {% endfor %}
                     </tbody>
                 </table>
             </div>
+
+                       <!-- Pagination Controls -->
+                       <div class="container mt-3">
+                        <div class="row align-items-center">
+                            <!-- Left Side: First & Previous Buttons -->
+                            <div class="col-auto">
+                                <button id="firstPageBtn" class="btn btn-secondary me-3" {% if not page_obj.has_previous %}disabled{% endif %}>« First</button>
+                                <button id="prevPageBtn" class="btn btn-secondary" {% if not page_obj.has_previous %}disabled{% endif %}>Previous</button>
+                            </div>
+                    
+                            <!-- Center: Pagination Info Styled as Button -->
+                            <div class="col text-center">
+                                <span class="current btn btn-primary px-4 py-2 fw-bold rounded-pill shadow">
+                                    Page <span id="currentPage">{{ page_obj.number }}</span> of <span id="totalPages">{{ page_obj.paginator.num_pages }}</span>
+                                </span>
+                            </div>
+                    
+                            <!-- Right Side: Next & Last Buttons -->
+                            <div class="col-auto text-end">
+                                <button id="nextPageBtn" class="btn btn-secondary me-3" {% if not page_obj.has_next %}disabled{% endif %}>Next</button>
+                                <button id="lastPageBtn" class="btn btn-secondary" {% if not page_obj.has_next %}disabled{% endif %}>Last »</button>
+                            </div>
+                        </div>
+                    </div>
+
+            
         </div>
     </div>
 </div>
 
+<!-- jQuery Script for AJAX -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var currentPage = {{ page_obj.number }};
+        var totalPages = {{ page_obj.paginator.num_pages }};
+
+        function loadPage(pageNumber) {
+            if (pageNumber < 1 || pageNumber > totalPages) return;  // Prevent invalid page numbers
+
+            $.ajax({
+                url: "?page=" + pageNumber,
+                type: "GET",
+                dataType: "html",
+                headers: { "X-Requested-With": "XMLHttpRequest" },
+                success: function (response) {
+                    var newContent = $(response).find("#property-list").html();
+                    $("#property-list").html(newContent);
+
+                    // Extract updated pagination controls
+                    var newPagination = $(response).find(".container.mt-3").html();
+                    $(".container.mt-3").html(newPagination);
+
+                    currentPage = pageNumber;
+                    attachPaginationHandlers();  // Reattach event handlers after updating pagination
+                },
+                error: function () {
+                    alert("Failed to load page.");
+                }
+            });
+        }
+
+        function attachPaginationHandlers() {
+            $(".container.mt-3").off("click");  // Remove previous event listeners to prevent duplication
+
+            $(".container.mt-3").on("click", "#nextPageBtn", function () {
+                loadPage(currentPage + 1);
+            });
+
+            $(".container.mt-3").on("click", "#prevPageBtn", function () {
+                loadPage(currentPage - 1);
+            });
+
+            $(".container.mt-3").on("click", "#firstPageBtn", function () {
+                loadPage(1);
+            });
+
+            $(".container.mt-3").on("click", "#lastPageBtn", function () {
+                loadPage(totalPages);
+            });
+        }
+
+        attachPaginationHandlers();  // Initialize pagination event listeners
+    });
+</script>
 {% endblock content %}

@@ -7,6 +7,8 @@ import cloudinary
 import cloudinary.uploader
 from cloudinary.utils import cloudinary_url
 from django.core.paginator import Paginator
+from django.shortcuts import redirect
+from django.contrib.auth.decorators import login_required
 
 cloudinary.config( 
     cloud_name = "dqz4xasg5", 
@@ -20,19 +22,23 @@ import os
 from django.conf import settings
 
 # Create your views here.
+@login_required
 def PropertyList(request):
-    paginator = Paginator(properties, 4)  # Show 4 properties per page
+    # 
+    data = PropertList.objects.all()
+    paginator = Paginator(data, 4)  # Show 4 properties per page
+
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    print("Total Properties:", properties.count())
+    print("Total Properties:", data.count())
     print("Current Page:", page_obj.number if page_obj else "None")
-
     context = {
+        'data' : data,
         'page_obj' : page_obj
     }
     return render(request,'property-listing/property_list.html',context)
 
-
+@login_required
 def PropertyAdd(request):
     stateList = MasterState.objects.all()
     bhkList = BHK.objects.all()
@@ -94,6 +100,7 @@ def PropertyAdd(request):
             if uploaded_urls:
                 property_create.file_url = uploaded_urls[0]  # Save the first image
                 property_create.save()
+                return redirect('property-list')
 
         
 
