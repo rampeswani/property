@@ -130,7 +130,8 @@ def partial(request):
 
     print("keyword = ",keyword)
     if keyword:
-        data = data.filter(property_list_title__icontains=keyword) 
+        # data = data.filter(property_list_title__icontains=keyword) 
+        data = data.filter(location__location_name__icontains=keyword)  # Search by location name
     paginator = Paginator(data, 4)  # Show 4 properties per page
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
