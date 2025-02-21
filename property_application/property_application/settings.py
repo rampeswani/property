@@ -30,7 +30,7 @@ cloudinary.config(
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-+e_b(#8o1^*8^p&bi!g35j5x-ijc$dqmd!$0cg$&rh0dhne!y3'
-
+file_path = "https://res.cloudinary.com/dqz4xasg5/image/upload/v1740054672/property_15/xfauttvxnqlwiynh6cxt.jpg"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -96,32 +96,32 @@ WSGI_APPLICATION = 'property_application.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        # 'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME': BASE_DIR / 'db.sqlite3',
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'RealEstate',
-        'USER': 'RealEstate_User',
-        'PASSWORD': '1',
-        'HOST': 'localhost',
-    }
-}
-
-
 # DATABASES = {
 #     'default': {
 #         # 'ENGINE': 'django.db.backends.sqlite3',
 #         # 'NAME': BASE_DIR / 'db.sqlite3',
 #         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'railway',
-#         'USER': 'postgres',
-#         'PASSWORD': 'FPnpxkBajVZKxUEqEJpBieiiXxZhyScM',
-#         'HOST': 'autorack.proxy.rlwy.net',
-#         'PORT' : '56578',
-        
+#         'NAME': 'RealEstate',
+#         'USER': 'RealEstate_User',
+#         'PASSWORD': '1',
+#         'HOST': 'localhost',
 #     }
 # }
+
+
+DATABASES = {
+    'default': {
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'railway',
+        'USER': 'postgres',
+        'PASSWORD': 'FPnpxkBajVZKxUEqEJpBieiiXxZhyScM',
+        'HOST': 'autorack.proxy.rlwy.net',
+        'PORT' : '56578',
+        
+    }
+}
 
 
 # Password validation
