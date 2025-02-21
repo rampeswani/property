@@ -1,5 +1,9 @@
 
 {% load static %}
+{% load ui_filters %}
+
+
+
 <style>
     .card {
         border-radius: 10px;
@@ -62,7 +66,8 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ property.property_list_title }}</h5>
                         <p class="card-text">
-                            <strong>Price Range:</strong> Rs{{ property.property_price_start_range }} - Rs{{ property.property_price_end_range }} <br>
+                            <strong>Price Range:</strong>Rs{{ property.property_price_start_range|to_lakh_crore }} - Rs{{ property.property_price_end_range|to_lakh_crore }} <br>
+                            
                             <strong>Size:</strong> {{ property.property_sqrt_start_range }} - {{ property.property_sqrt_end_range }} sqft <br>
                             <strong>Location:</strong> {{ property.location }}
                         </p>
