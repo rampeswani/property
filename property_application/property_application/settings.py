@@ -13,7 +13,16 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 import os 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+
+import cloudinary
+import cloudinary.uploader
 BASE_DIR = Path(__file__).resolve().parent.parent
+cloudinary.config( 
+    cloud_name = "dqz4xasg5", 
+    api_key = "969749835419172", 
+    api_secret = "a5v1GiUa5cPZDpOLAdG3MIPAA-0", # Click 'View API Keys' above to copy your API secret
+    secure=True
+)
 
 
 # Quick-start development settings - unsuitable for production

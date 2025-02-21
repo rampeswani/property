@@ -3,13 +3,34 @@ from home.models import MasterState
 from masters.models import BHK
 from .models import PropertList
 import uuid
+import cloudinary
+import cloudinary.uploader
+from cloudinary.utils import cloudinary_url
+from django.core.paginator import Paginator
+
+cloudinary.config( 
+    cloud_name = "dqz4xasg5", 
+    api_key = "969749835419172", 
+    api_secret = "a5v1GiUa5cPZDpOLAdG3MIPAA-0", # Click 'View API Keys' above to copy your API secret
+    secure=True
+)
+
 
 import os 
 from django.conf import settings
 
 # Create your views here.
 def PropertyList(request):
-    return render(request,'property-listing/property_list.html')
+    paginator = Paginator(properties, 4)  # Show 4 properties per page
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    print("Total Properties:", properties.count())
+    print("Current Page:", page_obj.number if page_obj else "None")
+
+    context = {
+        'page_obj' : page_obj
+    }
+    return render(request,'property-listing/property_list.html',context)
 
 
 def PropertyAdd(request):
@@ -33,7 +54,7 @@ def PropertyAdd(request):
         price_start = request.POST.get('price_start')
         price_end = request.POST.get('price_end')
 
-        photo = request.FILES.getlist('photo',None)
+        photos = request.FILES.getlist('photo',None)
         
 
         property_create = PropertList.objects.create(
@@ -56,26 +77,23 @@ def PropertyAdd(request):
             created_by_id = request.session.get('user_id')
             
         )
-        if photo:  # Ensure files were uploaded
-            for file in photo:  # Iterate over each uploaded file
-                # Define folder path using property ID
-                property_folder = os.path.join(settings.MEDIA_ROOT, 'uploads', f'property_{property_create.property_list_id}')
-                os.makedirs(property_folder, exist_ok=True)  # Create the folder if it doesn't exist
-
-                # Generate a unique filename
-                unique_filename = str(uuid.uuid4()) + os.path.splitext(file.name)[1]  # UUID + extension
-                file_path = os.path.join(property_folder, unique_filename)
-
-                # Save file to static/uploads/property_{id}/
-                with open(file_path, 'wb+') as destination:
-                    for chunk in file.chunks():
-                        destination.write(chunk)
-
-                # Store relative path in the database (only saving the last uploaded file path)
-                property_create.file_url = unique_filename
+        if photos:  # Ensure files were uploaded
+            uploaded_urls = []  # Store all image URLs
             
-            # Save property object after all images are processed
-            property_create.save()
+            for file in photos:
+                # Upload file to Cloudinary
+                response = cloudinary.uploader.upload(file, folder=f"property_{property_create.property_list_id}")
+                
+                # Get the Cloudinary URL
+                file_url = response.get('secure_url', '')  # Get secure URL
+                
+                if file_url:
+                    uploaded_urls.append(file_url)
+
+            # Store the first uploaded image URL (you can modify this for multiple images)
+            if uploaded_urls:
+                property_create.file_url = uploaded_urls[0]  # Save the first image
+                property_create.save()
 
         
 
@@ -85,3 +103,44 @@ def PropertyAdd(request):
         'bhkList' : bhkList
     }
     return render(request,'property-listing/property_create.html',context)
+
+def PropertyListWeb(request):
+    keyword = request.GET.get('keyword', '')  # Get keyword from GET request
+
+    print("keyword = ",keyword)
+    data = PropertList.objects.all()
+    paginator = Paginator(data, 4)  # Show 4 properties per page
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
+    print("Current Page:", page_obj.number if page_obj else "None")
+
+    
+    context={
+        'data' : data,
+        'page_obj' : page_obj
+
+    }
+    return render(request,'property-listing/property_list_web.html',context)
+
+
+def partial(request):
+    data = PropertList.objects.all()
+    keyword = request.GET.get('keyword', '').strip()  # Get keyword from GET request
+
+    print("keyword = ",keyword)
+    if keyword:
+        data = data.filter(property_list_title__icontains=keyword) 
+    paginator = Paginator(data, 4)  # Show 4 properties per page
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
+    print("Current Page:", page_obj.number if page_obj else "None")
+
+    
+    context={
+        'data' : data,
+        'page_obj' : page_obj
+
+    }
+    return render(request,'property-listing/partial_pages/_load_property_list_data_web.html',context)

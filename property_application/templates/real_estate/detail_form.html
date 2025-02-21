@@ -3,187 +3,94 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <ul class="nav nav-tabs w-100" id="propertyTabs" role="tablist">
-            <li class="nav-item" role="presentation">
-              <a class="nav-link active" id="buyer-tab" data-bs-toggle="tab" href="#buyer" role="tab" aria-controls="buyer" aria-selected="true">Buyer</a>
-            </li>
-            <li class="nav-item" role="presentation">
-              <a class="nav-link" id="seller-tab" data-bs-toggle="tab" href="#seller" role="tab" aria-controls="seller" aria-selected="false">Seller</a>
-            </li>
-          </ul>
+          Detail Form
         </div>
-        <div class="modal-body">
-          <!-- Tab content -->
-          <div class="tab-content" id="propertyTabsContent">
-            <!-- Buyer Tab -->
-            <div class="tab-pane fade show active" id="buyer" role="tabpanel" aria-labelledby="buyer-tab">
-              <form id="propertyForm" method ="POST">
-                {% csrf_token %}
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-
-                  <label for="name" class="form-label">Name</label>
-                  <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" required>
-                </div>
-                <div class="col-md-6 mb-3">
-
-                  <label for="number" class="form-label">Number</label>
-                  <input type="tel" class="form-control" id="number" name="number" placeholder="Enter your phone number" required>
-                </div>
-  
-                <div class="mb-3">
-
-                    <label for="state" class="form-label">Select Property Type</label>
-                    <select class="form-select" id="property" name="property" required>
-                      <option value="" selected disabled>Choose a Property Type...</option>
-                      {% for data in propertyTypeList %}
-                        <option value="{{ data.property_type_id }}">{{ data.property_type_name }}</option>
-                      {% endfor %}
-                    </select>
-                  </div>
-  
-                  <div class="mb-3">
-
-                    <label for="location" class="form-label" id="locationLabel"> where you want to Buy Property </label>
-
-                </div>
-                <div class="col-md-6 mb-3">
-
-
-                    <label for="state" class="form-label">Select State</label>
-                    <select class="form-select" id="state" name="state" required onclick="fetchCities()">
-                      <option value="" selected disabled>Choose a state...</option>
-                      {% for state in stateList %}
-                        <option value="{{ state.state_id }}">{{ state.state_name }}</option>
-                      {% endfor %}
-                    </select>
-                  </div>
-  
-                  <div class="col-md-6 mb-3">
-
-
-                    <label for="city" class="form-label">City</label>
-                    <select class="form-select" id="city" name="city" required onclick="handleCityChange()">
-                      <option value="" selected disabled>Choose a City</option>
-                    </select>
-                  </div>
-  
-                  <div class="mb-3">
-
-                    <label for="location" class="form-label">Location</label>
-                    <select class="form-select" id="location" name="location" required>
-                        <option value="" selected disabled>Choose a Location</option>
-                        <option value=""> other</option>
-                      </select>
-                    
-                  </div>
-
-                  <div class="mb-3">
-
-                    <label for="state" class="form-label">Select Reference</label>
-                    <select class="form-select" id="ref" name="ref" required>
-                      <option value="" selected disabled>Choose a Reference...</option>
-                      {% for data in ref_list %}
-                        <option value="{{ data.reference_id }}">{{ data.reference_name }}</option>
-                      {% endfor %}
-                    </select>
-                  </div>
-                
-                  <div class="mb-3">
-
-                  <label for="description" class="form-label">Description</label>
-                  <textarea class="form-control" id="description" name="description" rows="3" placeholder="Enter details about the property" ></textarea>
-                </div>
+        <form id="propertyForm" method="POST" action="{% url 'home' %}">
+          {% csrf_token %}
+          <div class="modal-body">
+            <!-- Buyer/Seller Selection -->
+            <div class="mb-3">
+              <label class="form-label">Are you a Buyer or Seller?</label>
+              <div>
+                {% for customer in customerTypeList %}
+                <input type="radio"  name="customer_type" value="{{ customer.type_id }}"  {% if forloop.first %}checked{% endif %} onchange="toggleUserType()">
+                <label for="{{ customer.type_name|lower }}">{{ customer.type_name }}</label>
+              {% endfor %}
+              </div>
             </div>
-              
-            </div>
-  
-            <!-- Seller Tab -->
-            <div class="tab-pane fade" id="seller" role="tabpanel" aria-labelledby="seller-tab">
-              <div class="row">
-                <div class="col-md-6 mb-3">
-
-                  <label for="name" class="form-label">Name</label>
-                  <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" required>
-                </div>
-                <div class="col-md-6 mb-3">
-
-                  <label for="number" class="form-label">Number</label>
-                  <input type="tel" class="form-control" id="number" name="number" placeholder="Enter your phone number" required>
-                </div>
-  
-                <div class="mb-3">
-                    <label for="state" class="form-label">Select Property Type</label>
-                    <select class="form-select" id="property" name="property" required>
-                      <option value="" selected disabled>Choose a Property Type...</option>
-                      {% for data in propertyTypeList %}
-                        <option value="{{ data.property_type_id }}">{{ data.property_type_name }}</option>
-                      {% endfor %}
-                    </select>
-                  </div>
-  
-                <div class="mb-3">
-                    <label for="location" class="form-label" id="locationLabel">Where You Want to Sell Property</label>
-
-                </div>
-                <div class="col-md-6 mb-3">
-
-
-                    <label for="state" class="form-label">Select State</label>
-                    <select class="form-select" id="statee" name="statee" required onclick="fetchCities2()">
-                      <option value="" selected disabled>Choose a state...</option>
-                      {% for state in stateList %}
-                        <option value="{{ state.state_id }}">{{ state.state_name }}</option>
-                      {% endfor %}
-                    </select>
-                  </div>
-  
-                  <div class="col-md-6 mb-3">
-
-
-                    <label for="city" class="form-label">City</label>
-                    <select class="form-select" id="cityy" name="cityy" required onclick="handleCityChange2()">
-                      <option value="" selected disabled>Choose a City</option>
-                    </select>
-                  </div>
-  
-                  <div class="mb-3">
-
-                    <label for="location" class="form-label">Location</label>
-                    <select class="form-select" id="location2" name="location2" required>
-                        <option value="" selected disabled>Choose a Location</option>
-                        <option value=""> other</option>
-                      </select>
-                    
-                  </div>
-
-                  
-                  <div class="mb-3">
-
-                    <label for="state" class="form-label">Select Reference</label>
-                    <select class="form-select" id="ref" name="ref" required>
-                      <option value="" selected disabled>Choose a Reference...</option>
-                      {% for data in ref_list %}
-                        <option value="{{ data.reference_id }}">{{ data.reference_name }}</option>
-                      {% endfor %}
-                    </select>
-                  </div>
-                
-                <div class="mb-3">
-                  <label for="description" class="form-label">Description</label>
-                  <textarea class="form-control" id="description" name="description" rows="3" placeholder="Enter details about the property" ></textarea>
-                </div>
-
-            </div>
-              
+        
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" required>
+              </div>
+        
+              <div class="col-md-6 mb-3">
+                <label for="number" class="form-label">Number</label>
+                <input type="tel" class="form-control" id="number" name="number" placeholder="Enter your phone number" required>
+              </div>
+        
+              <div class="mb-3">
+                <label for="property" class="form-label">Select Property Type</label>
+                <select class="form-select" id="property" name="property" required>
+                  <option value="" selected disabled>Choose a Property Type...</option>
+                  {% for data in propertyTypeList %}
+                  <option value="{{ data.property_type_id }}">{{ data.property_type_name }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+        
+              <div class="mb-3">
+                <label for="locationLabel" class="form-label" id="locationLabel">Where do you want to Buy Property?</label>
+              </div>
+        
+              <div class="col-md-6 mb-3">
+                <label for="state" class="form-label">Select State</label>
+                <select class="form-select" id="state" name="state" required onchange="fetchCities()">
+                  <option value="" selected disabled>Choose a state...</option>
+                  {% for state in stateList %}
+                  <option value="{{ state.state_id }}">{{ state.state_name }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+        
+              <div class="col-md-6 mb-3">
+                <label for="city" class="form-label">City</label>
+                <select class="form-select" id="city" name="city" required onclick="handleCityChange()">
+                  <option value="" selected disabled>Choose a City</option>
+                </select>
+              </div>
+        
+              <div class="mb-3">
+                <label for="location" class="form-label">Location</label>
+                <select class="form-select" id="location" name="location" required>
+                  <option value="" selected disabled>Choose a Location</option>
+                  <option value="">Other</option>
+                </select>
+              </div>
+        
+              <div class="mb-3">
+                <label for="ref" class="form-label">Select Reference</label>
+                <select class="form-select" id="ref" name="ref" required>
+                  <option value="" selected disabled>Choose a Reference...</option>
+                  {% for data in ref_list %}
+                  <option value="{{ data.reference_id }}">{{ data.reference_name }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+        
+              <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea class="form-control" id="description" name="description" rows="3" placeholder="Enter details about the property"></textarea>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary" form="propertyForm">Submit</button>
-        </div>
-    </form>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+        
       </div>
     </div>
   </div>
@@ -193,16 +100,11 @@
   <script>
 
      // When the tab is switched, change the label text
-  $('#propertyTabs a').on('click', function () {
-    var selectedTab = $(this).attr('id');
-    
-    if (selectedTab === 'buyer-tab') {
-      $('#locationLabel').text('Where You Want to Buy Property');
-    } else if (selectedTab === 'seller-tab') {
-      $('#locationLabel').text('Where You Want to Sell Property');
-    }
-  });
-
+     function toggleUserType() {
+      debugger
+    const customer_type = document.querySelector('input[name="customer_type"]:checked').value;
+    document.getElementById('locationLabel').textContent = customer_type === '1' ? 'Where do you want to Buy Property?' : 'Where do you want to Sell Property?';
+  }
     
 
     // When the state dropdown changes, make an AJAX request to fetch cities

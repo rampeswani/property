@@ -13,4 +13,5 @@ urlpatterns = [
     path('logout/', views.Logout, name='logout'),
     path('admin-',views.admin,name='admin'),
     path('list-form-data',views.ListFormData, name='list-form-data'),
+    path('big-index',views.Big, name='big-index'),
 ]

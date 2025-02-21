@@ -3,11 +3,12 @@ from django.http import JsonResponse
 from .models import Details
 from django.contrib.auth import logout
 from django.shortcuts import redirect
-from .models import MasterState , PropertyType, CityMaster , Location, ReferenceMaster ,Details
+from .models import MasterState , PropertyType, CityMaster , Location, ReferenceMaster ,Details,CustomerType
 from django.contrib.auth.decorators import login_required
 
 def Home(request):
     if(request.method == 'POST'):
+        print("inside the post of home view detail form")
         
         name = request.POST.get('name')
         number = request.POST.get('number')
@@ -17,6 +18,7 @@ def Home(request):
         remark = request.POST.get('description')
         reference = request.POST.get('ref')
         state = request.POST.get('state')
+        customer_type = request.POST.get('')
 
         data  = Details.objects.create(
             name = name,
@@ -30,11 +32,11 @@ def Home(request):
             customerType_id = 1 
         )
         data.save()
-        print("printing the user id ",request.user_id)
+        #print("printing the user id ",request.user_id)
         
 
         
-    return render(request,'real_estate/index.html')
+    return render(request,'real_estate/home.html')
 
 def New(request):
     
@@ -61,6 +63,7 @@ def DetailForm(request):
     stateList  = MasterState.objects.filter(is_active = True)
     propertyTypeList =  PropertyType.objects.filter(is_active = True)
     ref_list = ReferenceMaster.objects.filter(is_active = True)
+    customerTypeList = CustomerType.objects.all()
 
     if(request.method == 'POST'):
         print("hit the submit button")
@@ -72,7 +75,8 @@ def DetailForm(request):
     context = {
         'stateList' : stateList,
         'propertyTypeList' : propertyTypeList,
-        'ref_list' : ref_list
+        'ref_list' : ref_list,
+        'customerTypeList' : customerTypeList
     }
 
     return render(request,'real_estate/detail_form.html',context)
@@ -135,3 +139,6 @@ def ListFormData(request):
         'data' : data 
     }
     return render(request,'login/form_list.html',context)
+
+def Big(request):
+    return render(request,'real_estate/big_index.html')
