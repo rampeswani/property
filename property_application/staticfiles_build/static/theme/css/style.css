@@ -139,6 +139,18 @@
     font-weight: 500;
 }
 
+.whatsapp-link {
+    color: var(--dark) !important; /* Ensures color consistency */
+    font-weight: 500; /* Matches other nav links */
+    display: flex;
+    align-items: center;
+}
+.whatsapp-link img {
+    width: 20px;
+    height: 20px;
+}
+
+
 @media (min-width: 992px) {
     .navbar .nav-item .dropdown-menu {
         display: block;
@@ -438,3 +450,83 @@
     padding-right: 0;
     border-right: none;
 }
+
+/* Banner Background using a static Unsplash image */
+/* Overall Header Banner with Background Image */
+
+  /* Header Banner with Background Image */
+
+  /* Header Banner with Background Image and Black Border */
+
+  /* Header Banner with Background Image, Black Border, and Rounded Bottom Corners */
+  /* https://images.unsplash.com/photo-1570129477492-45c003edd2be?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80 */
+
+/* Full Header Banner with Background Image, Black Border, and Rounded Bottom Corners */
+.header-banner {
+    background: url('https://images.unsplash.com/photo-1433838552652-f9a46b332c40?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D ') no-repeat center center;
+    background-size: cover;
+    min-height: 300px;  /* Adjust height as needed */
+    position: relative;
+    border: 2px solid #000;  /* Black border */
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    overflow: hidden;
+  }
+  
+  /* White Panel on the Left with a Diagonal Right Edge */
+  .white-panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40%;       /* Panel covers left 40% of header */
+    height: 100%;
+    background: #fff;
+    /* Diagonal edge: right edge starts vertical at top and shifts left at bottom */
+    clip-path: polygon(0 0, 100% 0, 80% 100%, 0 100%);
+    z-index: 2;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Logo Box Styling within the White Panel */
+  .logo-box {
+    margin-bottom: 15px;  /* Space between the logo and tagline */
+    text-align: center;
+  }
+  
+  .logo-box img {
+    max-width: 120px; /* Adjust logo size as needed */
+    height: auto;
+    background: #fff;
+    padding: 5px;
+    border-radius: 5px;
+  }
+  
+  /* Tagline Styling inside the White Panel */
+  .tagline {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.8rem;
+    color: #333;
+    text-align: center;
+    margin: 0;
+    line-height: 1.2;
+  }
+  
+  .highlight {
+    color: #007bff;
+  }
+  
+  /* Indent the second line */
+  .second-line {
+    display: block;
+    margin-left: 40px;  /* Adjust indent spacing as needed */
+  }
+  
+
+
+
+
+  
