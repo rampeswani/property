@@ -25,9 +25,6 @@ cloudinary.config(
 )
 
 
-# TWILIO_ACCOUNT_SID = "AC8ba7637e6383a82e3a707f914cf5c1d2"
-# TWILIO_AUTH_TOKEN = "aae01ed575751eece847e81d8cd92133"
-# TWILIO_WHATSAPP_NUMBER = "whatsapp:+14155238886"  # Twilio sandbox number
 
 
 
