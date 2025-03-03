@@ -1,7 +1,7 @@
 echo "BUILD START"
 
 # Update package manager and install PostgreSQL development libraries
-apt-get update && apt-get install -y libpq-dev gcc
+# apt-get update && apt-get install -y libpq-dev gcc
 
 # Ensure pip and dependencies are installed
 python3.12 -m ensurepip --upgrade
