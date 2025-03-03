@@ -190,29 +190,29 @@ def ListFormData(request):
 def Big(request):
     return render(request,'real_estate/big_index.html')
 
-from twilio.rest import Client
+# from twilio.rest import Client
 from django.conf import settings
 
 
-def send_whatsapp_message(to,message):
-    client=Client(settings.TWILIO_ACCOUNT_SID,settings.TWILIO_AUTH_TOKEN)
-    try :
-        message=client.messages.create(
-            from_=settings.TWILIO_WHATSAPP_NUMBER,
-            body=message,
-            to=to
-        )
-        return f"message sent success  message sid :{message.sid}"
-    except Exception  as e :
-        return f"error {str(e)}"
+# def send_whatsapp_message(to,message):
+#     client=Client(settings.TWILIO_ACCOUNT_SID,settings.TWILIO_AUTH_TOKEN)
+#     try :
+#         message=client.messages.create(
+#             from_=settings.TWILIO_WHATSAPP_NUMBER,
+#             body=message,
+#             to=to
+#         )
+#         return f"message sent success  message sid :{message.sid}"
+#     except Exception  as e :
+#         return f"error {str(e)}"
     
-def send_whatsapp(request):
-    to = request.GET.get('to', 'whatsapp:+919893780766')  # Default number for testing
-    message = request.GET.get('message', 'Hello from Django via WhatsApp!')
+# def send_whatsapp(request):
+#     to = request.GET.get('to', 'whatsapp:+919893780766')  # Default number for testing
+#     message = request.GET.get('message', 'Hello from Django via WhatsApp!')
     
-    response = send_whatsapp_message(to, message)
+#     response = send_whatsapp_message(to, message)
     
-    return JsonResponse({"status": response})
+#     return JsonResponse({"status": response})
 
-def check(request):
-    return render(request,'new/index.html')
+# def check(request):
+#     return render(request,'new/index.html')
