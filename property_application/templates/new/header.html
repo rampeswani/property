@@ -1,0 +1,394 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Realestate Bootstrap Theme </title>
+<meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+ 	<link rel="stylesheet" href="{% static 'new theme/assets/bootstrap/css/bootstrap.css' %}" />
+  <link rel="stylesheet" href="{% static 'new theme/assets/style.css' %}"/>
+  
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="{% static 'new theme/assets/bootstrap/js/bootstrap.js' %}"></script>
+  <script src="{% static 'new theme/assets/script.js' %}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+<!-- Owl stylesheet -->
+<link rel="stylesheet" href="{% static 'new theme/assets/owl-carousel/owl.carousel.css' %}">
+<link rel="stylesheet" href="{% static  'new theme/assets/owl-carousel/owl.theme.css' %}">
+<script src="{% static 'new theme/assets/owl-carousel/owl.carousel.js' %}"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Owl stylesheet -->
+
+
+<!-- slitslider -->
+    <link rel="stylesheet" type="text/css" href="{% static 'new theme/assets/slitslider/css/style.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'new theme/assets/slitslider/css/custom.css' %}" />
+    <script type="text/javascript" src="{% static 'new theme/assets/slitslider/js/modernizr.custom.79639.js' %}"></script>
+    <script type="text/javascript" src="{% static 'new theme/assets/slitslider/js/jquery.ba-cond.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'new theme/assets/slitslider/js/jquery.slitslider.js' %}"></script>
+<!-- slitslider -->
+
+
+<style>
+  /* Ensure modal is visible */
+  .modal {
+      opacity: 1 !important;
+      visibility: visible !important;
+  }
+</style>
+
+<style>
+  /* Increase font size for navbar brand (Shri Ambica) */
+  .navbar-brand {
+      font-size: 24px; /* Adjust as needed */
+      font-weight: bold; /* Makes it bold */
+  }
+
+  /* Increase font size for navbar links */
+  .navbar-nav .nav-link {
+      font-size: 18px; /* Adjust as needed */
+      font-weight: 600; /* Slightly bold */
+      padding: 10px 15px; /* Adds spacing */
+  }
+
+  /* Add space between navbar items */
+.navbar-nav .nav-item {
+    margin-right: 20px; /* Adjust spacing between items */
+}
+
+/* Remove right margin from the last item to keep it aligned */
+.navbar-nav .nav-item:last-child {
+    margin-right: 0;
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<!-- Header Starts -->
+<div class="navbar-wrapper">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+          <!-- Logo / Brand -->
+          <a class="navbar-brand" href="index.php">Shri Ambica</a>
+
+          <!-- Mobile Toggle Button -->
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <!-- Navbar Links -->
+          <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav ms-auto">  <!-- Moves menu items to the right -->
+                  <li class="nav-item active">
+                      <a class="nav-link" href="index.php">Home</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#" id="openFormModal">Open Property Form</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="contact.php">Contact</a>
+                  </li>
+              </ul>
+          </div>
+      </div>
+  </nav>
+
+  <!-- Dynamic Modal Container (Outside of Navbar) -->
+  <div id="dynamicModalContainer"></div>
+</div>
+<!-- #Header Starts -->
+
+
+
+
+
+<div class="container">
+
+<!-- Header Starts -->
+<div class="header"style="{% if request.path != '/' %}background-color: white;{% endif %}">
+<a href="index.php"><img src="{% static 'theme/img/SHRI AMBICA REAL ESTATE LOGO.png' %}" alt="Realestate" width="150" height="auto"></a>
+
+              <ul class="pull-right">
+                <a href="https://wa.me/919909422430?text=I'm interested to know more about the project - Shri Ambika Real Estate .!%20I%20need%20some%20help." 
+                target="_blank" 
+                class="nav-link whatsapp-link">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" 
+                     alt="WhatsApp" 
+                     width="35" height="35" 
+                     style="margin-right: 12px;">
+                <span style="font-size: 18px; font-weight: bold;">Chat on WhatsApp</span>
+             </a>
+             
+              </ul>
+</div>
+<!-- #Header Starts -->
+</div>
+<
+
+{% if request.path == "/" %}
+<div class="">
+    
+
+  <div id="slider" class="sl-slider-wrapper">
+
+<div class="sl-slider">
+
+<div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="-25" data-slice2-rotation="-25" data-slice1-scale="2" data-slice2-scale="2">
+  <div class="sl-slide-inner">
+    <div class="bg-img bg-img-1"></div>
+    <h2><a href="#">Buy Pent House</a></h2>
+    <blockquote>              
+    <!-- <p class="location"><span class="glyphicon glyphicon-map-marker"></span> </p> -->
+    <p>Until he extends the circle of his compassion to all living things, man will not himself find peace.</p>
+    <!-- <cite></cite> -->
+    </blockquote>
+  </div>
+</div>
+
+<div class="sl-slide" data-orientation="vertical" data-slice1-rotation="10" data-slice2-rotation="-15" data-slice1-scale="1.5" data-slice2-scale="1.5">
+  <div class="sl-slide-inner">
+    <div class="bg-img bg-img-2"></div>
+    <h2><a href="#">Turning Dreams Into Reality</a></h2>
+    <blockquote>              
+    <!-- <p class="location"><span class="glyphicon glyphicon-map-marker"></span> 1890 Syndey, Australia</p> -->
+    <p>Until he extends the circle of his compassion to all living things, man will not himself find peace.</p>
+    <!-- <cite>$ 20,000,000</cite> -->
+    </blockquote>
+  </div>
+</div>
+
+<div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="3" data-slice2-rotation="3" data-slice1-scale="2" data-slice2-scale="1">
+  <div class="sl-slide-inner">
+    <div class="bg-img bg-img-3"></div>
+    <h2><a href="#">Turning Dreams Into Reality</a></h2>
+    <blockquote>              
+    <!-- <p class="location"><span class="glyphicon glyphicon-map-marker"></span> 1890 Syndey, Australia</p> -->
+    <p>Until he extends the circle of his compassion to all living things, man will not himself find peace.</p>
+    <!-- <cite>$ 20,000,000</cite> -->
+    </blockquote>
+  </div>
+</div>
+
+<div class="sl-slide" data-orientation="vertical" data-slice1-rotation="-5" data-slice2-rotation="25" data-slice1-scale="2" data-slice2-scale="1">
+  <div class="sl-slide-inner">
+    <div class="bg-img bg-img-4"></div>
+    <h2><a href="#">Turning Dreams Into Reality</a></h2>
+    <blockquote>              
+    <!-- <p class="location"><span class="glyphicon glyphicon-map-marker"></span> 1890 Syndey, Australia</p> -->
+    <p>Until he extends the circle of his compassion to all living things, man will not himself find peace.</p>
+    <!-- <cite>$ 20,000,000</cite> -->
+    </blockquote>
+  </div>
+</div>
+
+<div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="-5" data-slice2-rotation="10" data-slice1-scale="2" data-slice2-scale="1">
+  <div class="sl-slide-inner">
+    <div class="bg-img bg-img-5"></div>
+    <h2><a href="#">Turning Dreams Into Reality </a></h2>
+    <blockquote>              
+    <p class="location"><span class="glyphicon glyphicon-map-marker"></span> 1890 Syndey, Australia</p>
+    <p>Until he extends the circle of his compassion to all living things, man will not himself find peace.</p>
+    <cite>$ 20,000,000</cite>
+    </blockquote>
+  </div>
+</div>
+</div><!-- /sl-slider -->
+
+
+
+<nav id="nav-dots" class="nav-dots">
+<span class="nav-dot-current"></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+</nav>
+
+</div><!-- /slider-wrapper -->
+</div>
+
+
+
+<!-- banner -->
+
+{% endif %}
+djdjdfsh
+<br>
+{% block content %}
+
+{% endblock content %}
+
+
+
+
+
+
+<div class="footer">
+
+    <div class="container">
+    
+    
+    
+    <div class="row">
+                <div class="col-lg-3 col-sm-3">
+                       <h4>Information</h4>
+                       <ul class="row">
+                    <li class="col-lg-12 col-sm-12 col-xs-3"><a href="about.php">About</a></li>
+                    <li class="col-lg-12 col-sm-12 col-xs-3"><a href="agents.php">Agents</a></li>         
+                    <li class="col-lg-12 col-sm-12 col-xs-3"><a href="blog.php">Blog</a></li>
+                    <li class="col-lg-12 col-sm-12 col-xs-3"><a href="contact.php">Contact</a></li>
+                  </ul>
+                </div>
+                
+                <div class="col-lg-3 col-sm-3">
+                        <h4>Newsletter</h4>
+                        <p>Get notified about the latest properties in our marketplace.</p>
+                        <form class="form-inline" role="form">
+                                <input type="text" placeholder="Enter Your email address" class="form-control">
+                                    <button class="btn btn-success" type="button">Notify Me!</button></form>
+                </div>
+                
+                <div class="col-lg-3 col-sm-3">
+                        <h4>Follow us</h4>
+                        <a href="#"><img src="{% static 'new theme/images/facebook.png' %}" alt="facebook"></a>
+                        <a href="#"><img src="{% static 'new theme/images/twitter.png' %}" alt="twitter"></a>
+                        <a href="#"><img src="{% static 'new theme/images/linkedin.png' %}" alt="linkedin"></a>
+                        <a href="#"><img src="{% static 'new theme/images/instagram.png' %}" alt="instagram"></a>
+                </div>
+    
+                 <div class="col-lg-3 col-sm-3">
+                        <h4>Contact us</h4>
+                        <!-- <p><b>Bootstrap Realestate Inc.</b><br> -->
+    <span class="glyphicon glyphicon-map-marker"></span> Shop No. 3 , SSD Premium Living Nr. Jay Bhole Homes , Nana Chiloda, Ahmedabad- 382330 <br>
+    <span class="glyphicon glyphicon-envelope"></span> mehul@buypenthouse.in<br>
+    <span class="glyphicon glyphicon-earphone"></span> 9909422430</p>
+                </div>
+            </div>
+    <p class="copyright">Copyright 2013. All rights reserved.	</p>
+    
+    
+    </div></div>
+    
+    
+    
+    
+    <!-- Modal -->
+    <div id="loginpop" class="modal fade">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="row">
+            <div class="col-sm-6 login">
+            <h4>Login</h4>
+              <form class="" role="form">
+            <div class="form-group">
+              <label class="sr-only" for="exampleInputEmail2">Email address</label>
+              <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Enter email">
+            </div>
+            <div class="form-group">
+              <label class="sr-only" for="exampleInputPassword2">Password</label>
+              <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password">
+            </div>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox"> Remember me
+              </label>
+            </div>
+            <button type="submit" class="btn btn-success">Sign in</button>
+          </form>          
+            </div>
+            <div class="col-sm-6">
+              <h4>New User Sign Up</h4>
+              <p>Join today and get updated with all the properties deal happening around.</p>
+              <button type="submit" class="btn btn-info"  onclick="window.location.href='register.php'">Join Now</button>
+            </div>
+    
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.modal -->
+    <script>
+      $(document).ready(function () {
+        let modalTimer;
+
+        function loadModal() {
+          console.log("🟢 Loading Modal...");
+
+          // Check if jQuery is loaded
+          console.log("jQuery type:", typeof jQuery);
+
+          // Prevent duplicate modal opening
+          if ($('#propertyFormModal').length && $('#propertyFormModal').hasClass('show')) {
+            console.warn("⚠ Modal is already open!");
+            return;
+          }
+
+          $.ajax({
+            url: "{% url 'detail-form' %}", // Fetch modal content
+            type: "GET",
+            success: function (response) {
+              console.log("✅ AJAX Success: Modal Content Loaded!");
+
+              // Inject response into the modal container
+              $('#dynamicModalContainer').html(response);
+
+              setTimeout(function () {
+                $('#propertyFormModal').removeAttr('aria-hidden').modal('show');
+                console.log("✅ Modal is now visible!");
+                
+                // Fix opacity issue
+                $('#propertyFormModal').css("opacity", "1");
+              }, 100);
+
+              // Ensure modal closes properly
+              $('#propertyFormModal').off('hidden.bs.modal').on('hidden.bs.modal', function () {
+                console.log("🔴 Modal Closed - Clearing Content...");
+                $('#dynamicModalContainer').empty(); // Clear modal content
+                restartModalTimer(); // Restart the timer after modal is closed
+              });
+            },
+            error: function () {
+              console.error("❌ AJAX Error: Failed to load the form.");
+            }
+          });
+        }
+
+        function restartModalTimer() {
+          clearTimeout(modalTimer);
+          modalTimer = setTimeout(loadModal, 10000); // Restart modal load every 10 sec
+          console.log("⏳ Modal Timer Restarted (10s)");
+        }
+
+        // Debug Click Event on "Open Property Form" Button
+        $(document).on('click', '#openFormModal', function (e) {
+          e.preventDefault();
+          console.log("✅ Open Form Button Clicked!");
+          loadModal();
+        });
+
+        // Start the first modal popup timer
+        restartModalTimer();
+      });
+    </script>
+    
+    
+    </body>
+    
+    </html>
+    
+    
+    
+    

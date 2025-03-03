@@ -5,7 +5,7 @@ urlpatterns = [
   
   path('list',views.PropertyList , name='property-list'),
   path('add',views.PropertyAdd,name = 'property-add'),
-  path('list-display',views.PropertyListWeb, name='property-list-web'),
+  path('',views.PropertyListWeb, name='property-list-web'),
   path('load-partial',views.partial , name='partial'),
 
 ]

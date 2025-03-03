@@ -6,6 +6,40 @@ from django.shortcuts import redirect
 from .models import MasterState , PropertyType, CityMaster , Location, ReferenceMaster ,Details,CustomerType
 from django.contrib.auth.decorators import login_required
 
+# def Home(request):
+#     if(request.method == 'POST'):
+#         print("inside the post of home view detail form")
+        
+#         name = request.POST.get('name')
+#         number = request.POST.get('number')
+#         property_type = request.POST.get('property')
+#         city = request.POST.get('city')
+#         location = request.POST.get('location')
+#         remark = request.POST.get('description')
+#         reference = request.POST.get('ref')
+#         state = request.POST.get('state')
+#         customer_type = request.POST.get('')
+
+#         data  = Details.objects.create(
+#             name = name,
+#             number = number ,
+#             state_id = state ,
+#             city_id = city,
+#             location_id = location ,
+#             propertyType_id = property_type,
+#             referenceType_id = reference,
+#             remark = remark ,
+#             customerType_id = 1 
+#         )
+#         data.save()
+#         #print("printing the user id ",request.user_id)
+        
+
+        
+#     return render(request,'real_estate/home.html')
+from propertyListing.models import PropertList
+from django.core.paginator import Paginator
+from django.shortcuts import redirect
 def Home(request):
     if(request.method == 'POST'):
         print("inside the post of home view detail form")
@@ -33,10 +67,23 @@ def Home(request):
         )
         data.save()
         #print("printing the user id ",request.user_id)
-        
+    keyword = request.GET.get('keyword', '')  # Get keyword from GET request
 
-        
-    return render(request,'real_estate/home.html')
+    print("keyword = ",keyword)
+    data = PropertList.objects.all()
+    paginator = Paginator(data, 4)  # Show 4 properties per page
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
+    print("Current Page:", page_obj.number if page_obj else "None")
+
+    
+    context={
+        'data' : data,
+        'page_obj' : page_obj
+
+    }
+    return render(request,'property-listing/property_list_web.html',context)
 
 def New(request):
     
@@ -142,3 +189,30 @@ def ListFormData(request):
 
 def Big(request):
     return render(request,'real_estate/big_index.html')
+
+from twilio.rest import Client
+from django.conf import settings
+
+
+def send_whatsapp_message(to,message):
+    client=Client(settings.TWILIO_ACCOUNT_SID,settings.TWILIO_AUTH_TOKEN)
+    try :
+        message=client.messages.create(
+            from_=settings.TWILIO_WHATSAPP_NUMBER,
+            body=message,
+            to=to
+        )
+        return f"message sent success  message sid :{message.sid}"
+    except Exception  as e :
+        return f"error {str(e)}"
+    
+def send_whatsapp(request):
+    to = request.GET.get('to', 'whatsapp:+919893780766')  # Default number for testing
+    message = request.GET.get('message', 'Hello from Django via WhatsApp!')
+    
+    response = send_whatsapp_message(to, message)
+    
+    return JsonResponse({"status": response})
+
+def check(request):
+    return render(request,'new/index.html')

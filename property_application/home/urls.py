@@ -14,4 +14,7 @@ urlpatterns = [
     path('admin-',views.admin,name='admin'),
     path('list-form-data',views.ListFormData, name='list-form-data'),
     path('big-index',views.Big, name='big-index'),
+    path('send-whatsapp/', views.send_whatsapp, name='send_whatsapp'),
+    path('check',views.check, name='check')
+
 ]
