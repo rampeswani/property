@@ -81,7 +81,7 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container">
           <!-- Logo / Brand -->
-          <a class="navbar-brand" href="index.php">Shri Ambica</a>
+          <a class="navbar-brand" href="index.php">Home</a>
 
           <!-- Mobile Toggle Button -->
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -93,7 +93,7 @@
           <div class="collapse navbar-collapse" id="navbarNav">
               <ul class="navbar-nav ms-auto">  <!-- Moves menu items to the right -->
                   <li class="nav-item active">
-                      <a class="nav-link" href="index.php">Home</a>
+                      <a class="nav-link" href="index.php"></a>
                   </li>
                   <li class="nav-item">
                       <a class="nav-link" href="#" id="openFormModal">Open Property Form</a>
@@ -121,18 +121,23 @@
 <div class="header"style="{% if request.path != '/' %}background-color: white;{% endif %}">
 <a href="index.php"><img src="{% static 'theme/img/SHRI AMBICA REAL ESTATE LOGO.png' %}" alt="Realestate" width="150" height="auto"></a>
 
-              <ul class="pull-right">
+              <!-- <ul class="pull-right">
                 <a href="https://wa.me/919909422430?text=I'm interested to know more about the project - Shri Ambika Real Estate .!%20I%20need%20some%20help." 
                 target="_blank" 
                 class="nav-link whatsapp-link">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" 
                      alt="WhatsApp" 
                      width="35" height="35" 
-                     style="margin-right: 12px;">
-                <span style="font-size: 18px; font-weight: bold;">Chat on WhatsApp</span>
-             </a>
+                     style="margin-right: 12px;"> -->
+                <!-- <span style="font-size: 18px; font-weight: bold;">Chat on WhatsApp</span> -->
+             <!-- </a> -->
              
-              </ul>
+              <!-- </ul> -->
+               <ul class="pull-right">
+                <button ><span id="openFormModal" style="font-size: 18px; font-weight: bold;">Buy/Sell</span> 
+                </button>
+
+               </ul>
 </div>
 <!-- #Header Starts -->
 </div>
@@ -225,7 +230,7 @@
 <!-- banner -->
 
 {% endif %}
-djdjdfsh
+
 <br>
 {% block content %}
 
@@ -320,6 +325,53 @@ djdjdfsh
       </div>
     </div>
     <!-- /.modal -->
+
+
+    <!-- Floating WhatsApp Button -->
+<a href="https://wa.me/919909422430?text=I'm interested to know more about the project - Shri Ambika Real Estate .!%20I%20need%20some%20help." class="whatsapp-chat" target="_blank">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="Chat on WhatsApp">
+</a>
+
+
+<!-- <a href="https://wa.me/919909422430?text=I'm interested to know more about the project - Shri Ambika Real Estate .!%20I%20need%20some%20help." 
+target="_blank" 
+class="nav-link whatsapp-link">
+<img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" 
+     alt="WhatsApp" 
+     width="35" height="35" 
+     style="margin-right: 12px;"> -->
+<!-- <span style="font-size: 18px; font-weight: bold;">Chat on WhatsApp</span> -->
+<!-- </a> -->
+
+
+<!-- CSS -->
+<style>
+  .whatsapp-chat {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      width: 60px;
+      height: 60px;
+      background-color: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease-in-out;
+      z-index: 1000;
+  }
+
+  .whatsapp-chat img {
+      width: 40px;
+      height: 40px;
+  }
+
+  .whatsapp-chat:hover {
+      transform: scale(1.1);
+  }
+</style>
+
     <script>
       $(document).ready(function () {
         let modalTimer;
